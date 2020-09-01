@@ -1,0 +1,32 @@
+---
+title: "IMDB_Analysis"
+author: "Parker Barnes"
+date: "9/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:\\Users\\barne\\Box\\BYU\\Fall 2020\\STAT 495R (Kaggle)\\data\\")
+library(tidyverse)
+library(bestglm)
+library(ggplot2)
+```
+
+```{r}
+imdb_test <- read.csv("IMDBTest.csv")
+imdb_train <- read.csv("IMDBTrain.csv")
+```
+
+```{r}
+length(imdb_train)
+imdb_train[29] <- imdb_train$imdb_score
+imdb_train <- imdb_train[-26]
+var.selection = bestglm(imdb_train,IC="AIC",method="exhaustive",TopModels=1, na.omit = T)
+best_model <- var.selection$BestModel
+summary(best_model)
+```
+
+
+
+
